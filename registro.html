@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resitro de usuario</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+</head>
+
+<style>
+    body{
+        background-color: #6a91d4;
+    }
+   </style>
+
+<body>
+ <body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Navbar</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarText">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="index.html">Tu Fonda virtual</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="productos.html">Productos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="nosotros.html">Nosotros</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="contacto.html">Contacto</a>
+        </li>
+      </ul>
+      <span class="navbar-item">
+        <a class="btn btn-outline-primary btn-sm" href="#">Carrito de compras</a>
+        <a class="btn btn-outline-primary btn-sm" href="login.html">Iniciar Sesión</a>
+      </span>
+    </div>
+  </div>
+</nav>
+
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    
+    <form id="form-registro" class="col-12 col-md-6 col-lg-4 p-4 border rounded shadow-sm bg-white">
+        <h5>Ingrese sus datos para registrarse</h5>
+
+      <div class="mb-3">
+        <label for="nombre" class="form-label small text-muted mb-1">Nombre</label>
+        <input type="text" class="form-control form-control-sm" id="nombre" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="apellidos" class="form-label small text-muted mb-1">Apellido</label>
+        <input type="text" class="form-control form-control-sm" id="apellidos" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="email-registro" class="form-label small text-muted mb-1">Correo electronico</label>
+        <input type="email" class="form-control" id="email-registro" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="password-registro" class="form-label small text-muted mb-1">Contraseña</label>
+        <input type="password" class="form-control form-control-sm" id="password-registro" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="confirm-password-registro" class="form-label small text-muted mb-1">Confirmar Contraseña</label>
+        <input type="password" class="form-control form-control-sm" id="confirm-password-registro" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="numeroTelefono" class="form-label small text-muted mb-1">Número de telefono</label>
+        <input type="number" class="form-control form-control-sm" id="numeroTelefono">
+      </div>
+
+      <button type="submit" class="btn btn-primary btn-sm w-100 mt-2">Registrarme</button>
+    </form>
+  </div>
+</div>
+
+<script src="js/script.js"></script>
+
+</body>
+</html>
