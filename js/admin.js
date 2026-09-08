@@ -25,7 +25,7 @@ function cambiarSeccion(seccion) {
   }
 }
 
-// ================= 1. MANTENEDOR DE PRODUCTOS =================
+//
 
 async function cargarProductosAdmin() {
   try {
@@ -102,7 +102,7 @@ async function guardarNuevoProducto(e) {
     alert("¡Producto agregado localmente!");
   }
 
-  // Cerrar Modal y resetear formulario
+  // resetear formulario
   const modalEl = document.getElementById("modalCrearProducto");
   const modal = bootstrap.Modal.getInstance(modalEl);
   modal.hide();
@@ -116,7 +116,7 @@ function eliminarProducto(id) {
   }
 }
 
-// ================= 2. MANTENEDOR DE USUARIOS =================
+// ususarios
 
 function renderizarTablaUsuarios() {
   const tbody = document.getElementById("tabla-usuarios-body");
@@ -156,7 +156,7 @@ function guardarNuevoUsuario(e) {
   renderizarTablaUsuarios();
   alert("¡Usuario creado exitosamente!");
 
-  // Cerrar Modal y resetear formulario
+  //  resetear formulario
   const modalEl = document.getElementById("modalCrearUsuario");
   const modal = bootstrap.Modal.getInstance(modalEl);
   modal.hide();

@@ -1,152 +1,93 @@
 let productos = [];
-let carrito = [];
+let carrito = JSON.parse(localStorage.getItem('carrito_fonda')) || [];
 
-// Obtener los productos desde Node.js + MySQL
+// Obtener productos desde Node.js + MySQL
 async function cargarProductosDesdeBD() {
   try {
     const respuesta = await fetch('http://localhost:3000/api/productos');
+    if (!respuesta.ok) throw new Error("Error en la respuesta de la API");
+    
     productos = await respuesta.json();
     renderizarProductos(productos);
   } catch (error) {
-    console.error('Error al conectar con la base de datos:', error);
+    console.error('Error al conectar con la API de MySQL:', error);
   }
 }
 
-// Inyectar las tarjetas Bootstrap en el HTML
+// Dibujar los productos en pantalla
 function renderizarProductos(lista) {
   const contenedor = document.getElementById("productos-container");
-  contenedor.innerHTML = ""; // Limpia el contenedor
+  if (!contenedor) return;
+
+  contenedor.innerHTML = "";
 
   lista.forEach((producto) => {
-    const col = document.createElement("div");
-    col.classList.add("col");
+  const col = document.createElement("div");
+  col.classList.add("col");
 
-    // Fragmento de tarjeta actualizado dentro de renderizarProductos()
-col.innerHTML = `
-  <div class="card h-100 shadow-sm">
-    <a href="detalle-producto.html?id=${producto.id}">
-      <img src="${producto.imagen}" 
-           class="card-img-top" 
-           alt="${producto.nombre}" 
-           style="height: 200px; object-fit: cover;"
-           onerror="this.onerror=null; this.src='https://via.placeholder.com/300x200?text=Fiestas+Patrias';">
-    </a>
-    <div class="card-body d-flex flex-column justify-content-between text-center">
-      <div>
-        <h5 class="card-title">
-          <a href="detalle-producto.html?id=${producto.id}" class="text-decoration-none text-dark">
-            ${producto.nombre}
+  col.innerHTML = `
+    <div class="card h-100 shadow-sm border-0">
+      <a href="detalle-producto.html?id=${producto.id}">
+        <img src="${producto.imagen}" 
+             class="card-img-top" 
+             alt="${producto.nombre}"
+             style="height: 220px; object-fit: cover;"
+             onerror="this.onerror=null; this.src='https://via.placeholder.com/300x200?text=Fiestas+Patrias';">
+      </a>
+      <div class="card-body d-flex flex-column justify-content-between text-center p-3">
+        <div>
+          <span class="badge bg-danger text-uppercase mb-2">${producto.categoria}</span>
+          <h5 class="card-title fs-6 fw-bold mb-2">
+            <a href="detalle-producto.html?id=${producto.id}" class="text-decoration-none text-dark">
+              ${producto.nombre}
+            </a>
+          </h5>
+          <p class="card-text text-danger fw-bold fs-5 mb-3">$${Number(producto.precio).toLocaleString("es-CL")}</p>
+        </div>
+        
+        <!-- Botones de Acción -->
+        <div class="d-grid gap-2">
+          <a href="detalle-producto.html?id=${producto.id}" class="btn btn-outline-danger fw-bold">
+            <i class="bi bi-eye-fill me-1"></i> Ver detalles
           </a>
-        </h5>
-        <p class="card-text text-danger fw-bold fs-5">$${Number(producto.precio).toLocaleString("es-CL")}</p>
-      </div>
-      <div class="d-grid gap-2">
-        <a href="detalle-producto.html?id=${producto.id}" class="btn btn-outline-danger">Ver Detalle</a>
-        <button onclick="agregarAlCarrito(${producto.id})" class="btn btn-primary">Añadir al carrito</button>
+          <button onclick="agregarAlCarrito(${producto.id})" class="btn btn-primary fw-bold">
+            <i class="bi bi-cart-plus me-1"></i> Añadir al carrito
+          </button>
+        </div>
       </div>
     </div>
-  </div>
-`;
+  `;
+
 
     contenedor.appendChild(col);
   });
 }
 
-function agregarAlCarrito(id) {
-  const item = productos.find(p => p.id === id);
-  if (item) {
-    carrito.push(item);
-    document.getElementById("cart-count").innerText = carrito.length;
-    alert(`¡${item.nombre} agregado al carrito!`);
+function agregarAlCarrito(idProducto) {
+  const prod = productos.find(p => p.id === idProducto);
+  if (!prod) return;
+
+  const enCarrito = carrito.find(item => item.id === idProducto);
+  if (enCarrito) {
+    enCarrito.cantidad = (enCarrito.cantidad || 1) + 1;
+  } else {
+    carrito.push({ ...prod, cantidad: 1 });
+  }
+
+  localStorage.setItem('carrito_fonda', JSON.stringify(carrito));
+  actualizarContadorNavbar();
+  alert(`¡${prod.nombre} agregado al carrito!`);
+}
+
+function actualizarContadorNavbar() {
+  const badge = document.getElementById("cart-count");
+  if (badge) {
+    const total = carrito.reduce((sum, item) => sum + (item.cantidad || 1), 0);
+    badge.innerText = total;
   }
 }
 
-// Ejecutar la carga al estar listo el documento
 document.addEventListener("DOMContentLoaded", () => {
   cargarProductosDesdeBD();
+  actualizarContadorNavbar();
 });
-
-
-
-// Registro de usuario
-document.addEventListener('DOMContentLoaded', () => {
-const API_URL = "https://localhost:8081/api/usuarios";
-
-const formRegistro = document.getElementById('form-registro');
-    
-    if (formRegistro) {
-        formRegistro.addEventListener('submit', async (evento) => { 
-            evento.preventDefault();
-
-            const nombre = document.getElementById('nombre').value.trim();
-            const apellidos = document.getElementById('apellidos').value.trim();
-            const email = document.getElementById('email-registro').value.trim();
-            const password = document.getElementById('password-registro').value.trim();
-            const confirmPassword = document.getElementById('confirm-password-registro').value.trim();
-
-            if (password !== confirmPassword) {
-                alert('Las contraseñas no coinciden. Por favor, verifica.');
-                return;
-            }
-
-            if (password.length < 6) {
-                alert('La contraseña debe tener al menos 6 caracteres.');
-                return;
-            }
-
-            const nuevoUsuario = { nombre, apellidos, email, password };
-
-            try {
-                const respuesta = await fetch(API_URL, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(nuevoUsuario) 
-                });
-
-                if (respuesta.ok) {
-                    alert(`¡Registro exitoso! Bienvenido ${nombre}. Ya puedes iniciar sesión.`);
-                    window.location.href = 'login.html'; 
-                } else {
-                    alert('Hubo un problema al guardar el usuario en el servidor.');
-                }
-
-            } catch (error) {
-                alert('Error de conexión: No se pudo conectar con la base de datos externa.');
-            }
-        });
-    }
-
-    // Inicio de sesion
-    const formLogin = document.getElementById('form-login');
-    
-    if (formLogin) {
-        formLogin.addEventListener('submit', async (evento) => {
-            evento.preventDefault();
-
-            const email = document.getElementById('email-login').value.trim();
-            const password = document.getElementById('password-login').value.trim();
-
-            try {
-                const respuesta = await fetch(`${API_URL}?email=${email}&password=${password}`);
-                const resultadoBusqueda = await respuesta.json(); 
-
-                if (resultadoBusqueda.length > 0) {
-                    const usuarioValido = resultadoBusqueda[0];
-                    
-                    localStorage.setItem('usuarioLogueado', JSON.stringify(usuarioValido));
-                    
-                    alert(`¡Ingreso exitoso! Hola de nuevo, ${usuarioValido.nombre}.`);
-                    window.location.href = 'index.html';
-                } else {
-                    alert('El correo electrónico o la contraseña son incorrectos.');
-                }
-
-            } catch (error) {
-                alert('Error de conexión: No se pudo validar los datos con el servidor.');
-            }
-        });
-    }
-});
-
-
-
