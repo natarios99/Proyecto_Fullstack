@@ -36,16 +36,17 @@ app.get('/api/productos', (req, res) => {
   });
 });
 
-// Ruta POST: Agregar un nuevo producto
+// Ruta POST: Guardar nuevo producto desde el panel de administración
 app.post('/api/productos', (req, res) => {
-  const { nombre, precio, categoria, imagen } = req.body;
-  const sql = 'INSERT INTO productos (nombre, precio, categoria, imagen) VALUES (?, ?, ?, ?)';
+  const { nombre, precio, categoria, imagen, descripcion } = req.body;
+  const sql = 'INSERT INTO productos (nombre, precio, categoria, imagen, descripcion) VALUES (?, ?, ?, ?, ?)';
   
-  db.query(sql, [nombre, precio, categoria, imagen], (err, result) => {
+  db.query(sql, [nombre, precio, categoria, imagen, descripcion], (err, result) => {
     if (err) {
+      console.error("Error insertando producto:", err);
       return res.status(500).json({ error: 'Error al guardar el producto' });
     }
-    res.status(201).json({ message: 'Producto agregado exitosamente', id: result.insertId });
+    res.status(201).json({ message: 'Producto guardado con éxito', id: result.insertId });
   });
 });
 
