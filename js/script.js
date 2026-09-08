@@ -21,18 +21,32 @@ function renderizarProductos(lista) {
     const col = document.createElement("div");
     col.classList.add("col");
 
-    col.innerHTML = `
-      <div class="card h-100 shadow-sm">
-        <img src="${producto.imagen}" class="card-img-top" alt="${producto.nombre}" style="height: 200px; object-fit: cover;">
-        <div class="card-body d-flex flex-column justify-content-between text-center">
-          <div>
-            <h5 class="card-title">${producto.nombre}</h5>
-            <p class="card-text text-danger fw-bold fs-5">$${Number(producto.precio).toLocaleString("es-CL")}</p>
-          </div>
-          <button onclick="agregarAlCarrito(${producto.id})" class="btn btn-primary mt-3">Añadir al carrito</button>
-        </div>
+    // Fragmento de tarjeta actualizado dentro de renderizarProductos()
+col.innerHTML = `
+  <div class="card h-100 shadow-sm">
+    <a href="detalle-producto.html?id=${producto.id}">
+      <img src="${producto.imagen}" 
+           class="card-img-top" 
+           alt="${producto.nombre}" 
+           style="height: 200px; object-fit: cover;"
+           onerror="this.onerror=null; this.src='https://via.placeholder.com/300x200?text=Fiestas+Patrias';">
+    </a>
+    <div class="card-body d-flex flex-column justify-content-between text-center">
+      <div>
+        <h5 class="card-title">
+          <a href="detalle-producto.html?id=${producto.id}" class="text-decoration-none text-dark">
+            ${producto.nombre}
+          </a>
+        </h5>
+        <p class="card-text text-danger fw-bold fs-5">$${Number(producto.precio).toLocaleString("es-CL")}</p>
       </div>
-    `;
+      <div class="d-grid gap-2">
+        <a href="detalle-producto.html?id=${producto.id}" class="btn btn-outline-danger">Ver Detalle</a>
+        <button onclick="agregarAlCarrito(${producto.id})" class="btn btn-primary">Añadir al carrito</button>
+      </div>
+    </div>
+  </div>
+`;
 
     contenedor.appendChild(col);
   });
