@@ -1,0 +1,33 @@
+
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '1234';
+FLUSH PRIVILEGES;
+
+CREATE DATABASE IF NOT EXISTS fonda_virtual;
+USE fonda_virtual;
+
+DROP TABLE IF EXISTS productos;
+
+CREATE TABLE productos (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    precio INT NOT NULL,
+    categoria VARCHAR(50) NOT NULL,
+    imagen VARCHAR(255) NOT NULL,
+    descripcion TEXT
+);
+
+INSERT INTO productos (nombre, precio, categoria, imagen, descripcion) VALUES
+('Banderines Tricolor (10M)', 3990, 'decoracion', 'img/banderines.webp', 'Guirnalda plástica tricolor de 10 metros, resistente a la intemperie.'),
+('Set Copihues Artificiales (6 un)', 5990, 'decoracion', 'img/copihues-artificiales.webp', 'Pack de 6 copihues de seda sintética roja con hojas verdes flexibles.'),
+('Emboque de Madera', 4500, 'juegos', 'img/emboque.webp', 'Emboque artesanal hecho en madera de pino pulida con cordón reforzado.'),
+('Guirnalda Papel Volantín', 1990, 'decoracion', 'img/guirnalda.webp', 'Guirnalda extensible de 3 metros en papel tricolor para interiores.'),
+('Manta Huasa Tradicional', 24990, 'vestimenta', 'img/manta.jpg', 'Manta huasa tejida con motivos folclóricos tradicionales de la zona central.'),
+('Mantel Plástico Diseño Patrio', 2990, 'parrilla', 'img/mantel.webp', 'Mantel plástico impermeable con estampado de la bandera chilena de 1.40 x 2.00 m.'),
+('Juego de la Rayuela Completo', 18990, 'juegos', 'img/Rayuela.jpg', 'Kit completo con cajón de madera, greda y 2 tejos metálicos pesados.'),
+('Set Parrillero (Pinzas y Cuchillo)', 15990, 'parrilla', 'img/set-parrilla.webp', 'Trío de utensilios de acero inoxidable con mango aislante de calor.'),
+('Sombrero de Huaso de Paño', 12990, 'vestimenta', 'img/sombrero-huaso.jpg', 'Sombrero negro de paño denso con ala ancha y cinta decorativa.'),
+('Trompo de Madera con Liza', 3500, 'juegos', 'img/trompo.jpg', 'Confeccionado en madera nativa con punta metálica y liza de algodón.'),
+('Vestido de China Tradicional', 21990, 'vestimenta', 'img/vestido-china.webp', 'Vestido floreado con encajes y faldón con volumen para baile de cueca.'),
+('Volantín de Plástico con Hilo', 2500, 'juegos', 'img/volantin.webp', 'Volantín de plástico resistente con carrete de 100 m de hilo seguro.');
+
+SELECT * FROM productos;
