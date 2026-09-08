@@ -1,0 +1,123 @@
+/* ==========================================================
+   ESTILOS CATÁLOGO DE PRODUCTOS - FONDA VIRTUAL
+   ========================================================== */
+
+:root {
+  --rojo-patrio: #d52b1e;
+  --rojo-hover: #b01b10;
+  --azul-patrio: #002b7f;
+  --gris-fondo: #f4f6f9;
+  --blanco: #ffffff;
+  --sombras: rgba(0, 0, 0, 0.08);
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--gris-fondo);
+  color: #333333;
+}
+
+/* ----------------------------------------------------------
+   BARRA DE NAVEGACIÓN
+   ---------------------------------------------------------- */
+.navbar {
+  background-color: var(--rojo-patrio) !important;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.navbar-brand, .nav-link {
+  color: var(--blanco) !important;
+  font-weight: 500;
+}
+
+.nav-link:hover, .nav-link.active {
+  color: #f5b041 !important; /* Dorado patrio */
+}
+
+/* ----------------------------------------------------------
+   TÍTULO PRINCIPAL
+   ---------------------------------------------------------- */
+h1 {
+  color: var(--azul-patrio);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  position: relative;
+  display: inline-block;
+  margin-bottom: 30px !important;
+}
+
+h1::after {
+  content: '';
+  display: block;
+  width: 60%;
+  height: 4px;
+  background-color: var(--rojo-patrio);
+  margin: 8px auto 0;
+  border-radius: 2px;
+}
+
+/* ----------------------------------------------------------
+   TARJETAS DE PRODUCTOS (GRILLA DINÁMICA)
+   ---------------------------------------------------------- */
+.card {
+  border: none !important;
+  border-radius: 14px;
+  background-color: var(--blanco);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
+  box-shadow: 0 4px 12px var(--sombras);
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 22px rgba(0, 0, 0, 0.15);
+}
+
+.card-img-top {
+  height: 220px;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.card:hover .card-img-top {
+  transform: scale(1.04);
+}
+
+.card-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #212529;
+  margin-bottom: 10px;
+}
+
+.card-text {
+  font-size: 1.25rem;
+  letter-spacing: 0.5px;
+}
+
+/* ----------------------------------------------------------
+   BOTONES
+   ---------------------------------------------------------- */
+.btn-primary {
+  background-color: var(--rojo-patrio) !important;
+  border-color: var(--rojo-patrio) !important;
+  border-radius: 8px;
+  font-weight: 600;
+  padding: 10px 16px;
+  transition: all 0.2s ease-in-out;
+}
+
+.btn-primary:hover {
+  background-color: var(--rojo-hover) !important;
+  border-color: var(--rojo-hover) !important;
+  box-shadow: 0 4px 10px rgba(213, 43, 30, 0.3);
+}
+
+/* Badge del Carrito en el Nav */
+#cart-count {
+  background-color: #f5b041;
+  color: #000;
+  padding: 3px 8px;
+  border-radius: 12px;
+}
