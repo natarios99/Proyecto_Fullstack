@@ -25,7 +25,7 @@ function cambiarSeccion(seccion) {
   }
 }
 
-// ================= 1. MANTENEDOR DE PRODUCTOS =================
+//
 
 async function cargarProductosAdmin() {
   try {
