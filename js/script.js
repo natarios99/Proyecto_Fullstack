@@ -23,7 +23,11 @@ function renderizarProductos(lista) {
 
     col.innerHTML = `
       <div class="card h-100 shadow-sm">
-        <img src="${producto.imagen}" class="card-img-top" alt="${producto.nombre}" style="height: 200px; object-fit: cover;">
+        <img src="${producto.imagen}" 
+             class="card-img-top" 
+             alt="${producto.nombre}" 
+             style="height: 200px; object-fit: cover;"
+             onerror="this.src='https://via.placeholder.com/300x200?text=Imagen+No+Encontrada'">
         <div class="card-body d-flex flex-column justify-content-between text-center">
           <div>
             <h5 class="card-title">${producto.nombre}</h5>
