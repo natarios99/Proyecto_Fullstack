@@ -1,6 +1,4 @@
-/* ==========================================================
-   ESTILOS CATÁLOGO DE PRODUCTOS - FONDA VIRTUAL
-   ========================================================== */
+/* important forzar el color sin importar el orden del codigo */
 
 :root {
   --rojo-patrio: #d52b1e;
@@ -17,9 +15,7 @@ body {
   color: #333333;
 }
 
-/* ----------------------------------------------------------
-   BARRA DE NAVEGACIÓN
-   ---------------------------------------------------------- */
+/*BARRA DE NAVbar*/
 .navbar {
   background-color: var(--rojo-patrio) !important;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
@@ -31,12 +27,10 @@ body {
 }
 
 .nav-link:hover, .nav-link.active {
-  color: #f5b041 !important; /* Dorado patrio */
+  color: #f5b041 !important; 
 }
 
-/* ----------------------------------------------------------
-   TÍTULO PRINCIPAL
-   ---------------------------------------------------------- */
+/*TÍTULO PRINCIPAL */
 h1 {
   color: var(--azul-patrio);
   font-weight: 800;
@@ -57,9 +51,9 @@ h1::after {
   border-radius: 2px;
 }
 
-/* ----------------------------------------------------------
+/*
    TARJETAS DE PRODUCTOS (GRILLA DINÁMICA)
-   ---------------------------------------------------------- */
+ */
 .card {
   border: none !important;
   border-radius: 14px;
@@ -96,9 +90,7 @@ h1::after {
   letter-spacing: 0.5px;
 }
 
-/* ----------------------------------------------------------
-   BOTONES
-   ---------------------------------------------------------- */
+/* botones */
 .btn-primary {
   background-color: var(--rojo-patrio) !important;
   border-color: var(--rojo-patrio) !important;
